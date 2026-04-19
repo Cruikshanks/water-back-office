@@ -1,24 +1,20 @@
 {
   "name": "water-back-office",
   "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Cruikshanks/water-back-office",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Beckyrose200/water-back-office.git"
+    "url": "git+https://github.com/Cruikshanks/water-back-office.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Beckyrose200/water-back-office/issues"
-  },
-  "homepage": "https://github.com/Beckyrose200/water-back-office#readme",
-  "description": "",
+  "author": "Water service team",
+  "license": "OGL-UK-3.0",
   "dependencies": {
-    "@hapi/hapi": "^21.4.0",
-    "water-engine": "git+https://github.com/Beckyrose200/water-engine.git#main"
+    "@hapi/hapi": "^21.4.8",
+    "water-engine": "git+https://github.com/Cruikshanks/water-engine.git#main"
   }
 }
