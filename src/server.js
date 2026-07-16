@@ -1,7 +1,8 @@
 'use strict'
 
 const Hapi = require('@hapi/hapi')
-const { getLicenceDetails } = require('water-engine')
+
+const { ViewLicenceService } = require('water-engine')
 
 const init = async () => {
   const server = Hapi.server({
@@ -14,12 +15,28 @@ const init = async () => {
     path: '/licence/{licenceId}',
     handler: (request, h) => {
       const { licenceId } = request.params
-      return getLicenceDetails(licenceId)
+      return ViewLicenceService.go(licenceId)
     }
   })
 
-  await server.start()
-  console.log('Back-office server running on %s', server.info.uri)
+  await server.initialize()
+
+  return server
 }
 
-init()
+const start = async () => {
+  const server = await init()
+
+  await server.start()
+
+  console.log('Back-office server running on %s', server.info.uri)
+
+  return server
+}
+
+process.on('unhandledRejection', (err) => {
+  console.error(err)
+  process.exit(1)
+})
+
+module.exports = { init, start }
