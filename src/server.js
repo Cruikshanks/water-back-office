@@ -1,10 +1,8 @@
-'use strict'
+import Hapi from '@hapi/hapi'
 
-const Hapi = require('@hapi/hapi')
+import { ViewLicenceService } from 'water-engine/services'
 
-const { ViewLicenceService } = require('water-engine')
-
-const init = async () => {
+export async function init () {
   const server = Hapi.server({
     port: 3002,
     host: 'localhost'
@@ -15,7 +13,7 @@ const init = async () => {
     path: '/licence/{licenceId}',
     handler: (request, h) => {
       const { licenceId } = request.params
-      return ViewLicenceService.go(licenceId)
+      return ViewLicenceService(licenceId)
     }
   })
 
@@ -24,7 +22,7 @@ const init = async () => {
   return server
 }
 
-const start = async () => {
+export async function start () {
   const server = await init()
 
   await server.start()
@@ -38,5 +36,3 @@ process.on('unhandledRejection', (err) => {
   console.error(err)
   process.exit(1)
 })
-
-module.exports = { init, start }
