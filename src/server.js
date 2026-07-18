@@ -1,6 +1,7 @@
 import Hapi from '@hapi/hapi'
 
-import { ViewLicenceService } from 'water-engine/services'
+import ViewBillRunService from 'water-engine/services/bill-runs/view-bill-run.service.js'
+import ViewLicenceService from 'water-engine/services/licences/view-licence.service.js'
 
 export async function init () {
   const server = Hapi.server({
@@ -10,10 +11,19 @@ export async function init () {
 
   server.route({
     method: 'GET',
-    path: '/licence/{licenceId}',
+    path: '/licences/{licenceId}',
     handler: (request, h) => {
       const { licenceId } = request.params
       return ViewLicenceService(licenceId)
+    }
+  })
+
+  server.route({
+    method: 'GET',
+    path: '/bill-runs/{billRunId}',
+    handler: (request, h) => {
+      const { billRunId } = request.params
+      return ViewBillRunService(billRunId)
     }
   })
 
