@@ -1,32 +1,12 @@
 import Hapi from '@hapi/hapi'
 
-import ViewBillRunService from 'water-engine/services/bill-runs/view-bill-run.service.js'
-import ViewLicenceService from 'water-engine/services/licences/view-licence.service.js'
+import RouterPlugin from './plugins/router.plugin.js'
+import ServerConfig from '../config/server.config.js'
 
 export async function init () {
-  const server = Hapi.server({
-    port: 3002,
-    host: 'localhost'
-  })
+  const server = Hapi.server(ServerConfig.hapi)
 
-  server.route({
-    method: 'GET',
-    path: '/licences/{licenceId}',
-    handler: (request, h) => {
-      const { licenceId } = request.params
-      return ViewLicenceService(licenceId)
-    }
-  })
-
-  server.route({
-    method: 'GET',
-    path: '/bill-runs/{billRunId}',
-    handler: (request, h) => {
-      const { billRunId } = request.params
-      return ViewBillRunService(billRunId)
-    }
-  })
-
+  await _registerPlugins(server)
   await server.initialize()
 
   return server
@@ -46,3 +26,7 @@ process.on('unhandledRejection', (err) => {
   console.error(err)
   process.exit(1)
 })
+
+async function _registerPlugins (server) {
+  await server.register(RouterPlugin)
+}

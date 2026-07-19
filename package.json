@@ -17,6 +17,7 @@
   "license": "OGL-UK-3.0",
   "dependencies": {
     "@hapi/hapi": "^21.4.8",
+    "dotenv": "^17.4.2",
     "water-engine": "git+https://github.com/Cruikshanks/water-engine.git#main"
   }
 }
