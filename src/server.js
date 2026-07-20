@@ -1,7 +1,9 @@
 import Hapi from '@hapi/hapi'
 import HapiPinoPlugin from 'water-engine/plugins/hapi-pino.plugin.js'
+import KeepYarAlivePlugin from 'water-engine/plugins/keep-yar-alive.plugin.js'
 import PayloadCleanerPlugin from 'water-engine/plugins/payload-cleaner.plugin.js'
 import StopPlugin from 'water-engine/plugins/stop.plugin.js'
+import YarPlugin from 'water-engine/plugins/yar.plugin.js'
 
 import RouterPlugin from './plugins/router.plugin.js'
 import ServerConfig from '../config/server.config.js'
@@ -48,8 +50,12 @@ process.on('unhandledRejection', (err) => {
 })
 
 async function _registerPlugins(server) {
+  // NOTE: This order matters to some plugins we register. Inserting into the order should be fine. But if you reorder
+  // any existing plugin registration double-check you haven't broken anything!
   await server.register(StopPlugin)
+  await server.register(YarPlugin)
   await server.register(RouterPlugin)
   await server.register(HapiPinoPlugin)
   await server.register(PayloadCleanerPlugin)
+  await server.register(KeepYarAlivePlugin)
 }
