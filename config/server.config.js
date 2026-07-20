@@ -4,12 +4,12 @@ import 'dotenv/config'
 
 export default {
   domains: {
-    external: 'http://localhost:3001',
-    internal: 'http://localhost:3002'
+    external: process.env.EXTERNAL_DOMAIN,
+    internal: process.env.INTERNAL_DOMAIN
   },
   environment: process.env.NODE_ENV || 'development',
   hapi: {
-    port: 3002,
+    port: process.env.PORT,
     // The router section controls how incoming request URIs are matched against the routing table. In our AWS
     // environments we see trailing slashes added to the end of paths so this deals with that issue. We also don't want
     // client systems having to worry about what case they use for the endpoint when making a request.

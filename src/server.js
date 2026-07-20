@@ -1,4 +1,5 @@
 import Hapi from '@hapi/hapi'
+import HapiPinoPlugin from 'water-engine/plugins/hapi-pino.plugin.js'
 import PayloadCleanerPlugin from 'water-engine/plugins/payload-cleaner.plugin.js'
 
 import RouterPlugin from './plugins/router.plugin.js'
@@ -37,8 +38,6 @@ export async function start() {
 
   await server.start()
 
-  console.log('Back-office server running on %s', server.info.uri)
-
   return server
 }
 
@@ -49,5 +48,6 @@ process.on('unhandledRejection', (err) => {
 
 async function _registerPlugins(server) {
   await server.register(RouterPlugin)
+  await server.register(HapiPinoPlugin)
   await server.register(PayloadCleanerPlugin)
 }
