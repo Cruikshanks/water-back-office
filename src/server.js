@@ -1,6 +1,7 @@
 import Hapi from '@hapi/hapi'
 import HapiPinoPlugin from 'water-engine/plugins/hapi-pino.plugin.js'
 import PayloadCleanerPlugin from 'water-engine/plugins/payload-cleaner.plugin.js'
+import StopPlugin from 'water-engine/plugins/stop.plugin.js'
 
 import RouterPlugin from './plugins/router.plugin.js'
 import ServerConfig from '../config/server.config.js'
@@ -47,6 +48,7 @@ process.on('unhandledRejection', (err) => {
 })
 
 async function _registerPlugins(server) {
+  await server.register(StopPlugin)
   await server.register(RouterPlugin)
   await server.register(HapiPinoPlugin)
   await server.register(PayloadCleanerPlugin)
