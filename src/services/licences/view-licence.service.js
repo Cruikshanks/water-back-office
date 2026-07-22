@@ -13,6 +13,12 @@ import FetchLicenceService from 'water-engine/dal/licences/fetch-licence.service
  * @returns {<object>} an object representing the `pageData` needed by the view licence template. It contains
  * details of the licence and any linked data plus the page title.
  */
-export default function viewLicenceService(licenceId) {
-  return FetchLicenceService(licenceId)
+export default async function viewLicenceService(licenceId) {
+  const licence = await FetchLicenceService(licenceId)
+
+  return {
+    pageTitle: `Licence summary ${licence.licenceRef}`,
+    pageTitleCaption: 'Unregistered licence',
+    ...licence
+  }
 }

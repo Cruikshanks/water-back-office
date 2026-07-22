@@ -1,0 +1,31 @@
+{% extends 'layout.njk' %}
+
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% block pageContent %}
+  {{ govukSummaryList({
+    classes: 'govuk-summary-list--no-border',
+    attributes: {
+      'data-test': 'meta-data'
+    },
+    rows: [
+      {
+        key: { text: 'Holder', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-data-holder">' + holder + '</span>', classes: "meta-data__value" }
+      } if reference,
+      {
+        key: { text: 'Type', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-data-type">' + type + '</span>', classes: "meta-data__value" }
+      },
+      {
+        key: { text: 'Status', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-data-status">' + status + '</span>', classes: "meta-data__value" }
+      },
+      {
+        key: { text: 'Expiry date', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-data-expiry-date">' + expiryDate + '</span>', classes: "meta-data__value" }
+      }
+    ]
+  }) }}
+
+{% endblock %}
