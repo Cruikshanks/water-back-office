@@ -1,7 +1,10 @@
 import BaseServer from 'water-engine/base-server'
 
+import AirbrakeConfig from '../config/airbrake.config.js'
+import HapiConfig from '../config/hapi.config.js'
 import RouterPlugin from './plugins/router.plugin.js'
 import ServerConfig from '../config/server.config.js'
+import YarConfig from '../config/yar.config.js'
 
 /**
  * Initialises the Hapi server without starting it
@@ -15,9 +18,9 @@ import ServerConfig from '../config/server.config.js'
  * @returns {Promise<object>} The initialised Hapi server instance
  */
 export async function init() {
-  ServerConfig.vision = _visionConfig()
+  const config = _config()
 
-  const server = await BaseServer(ServerConfig)
+  const server = await BaseServer(config)
 
   await _registerPlugins(server)
   await server.initialize()
@@ -45,6 +48,16 @@ process.on('unhandledRejection', (err) => {
   console.error(err)
   process.exit(1)
 })
+
+function _config() {
+  return {
+    airbrake: AirbrakeConfig,
+    hapi: HapiConfig,
+    server: ServerConfig,
+    vision: _visionConfig(),
+    yar: YarConfig
+  }
+}
 
 async function _registerPlugins(server) {
   // NOTE: This order matters to some plugins we register. Inserting into the order should be fine. But if you reorder
