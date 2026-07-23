@@ -22,7 +22,7 @@
   "dependencies": {
     "dotenv": "^17.4.2",
     "sass": "^1.101.3",
-    "water-engine": "git+https://github.com/Cruikshanks/water-engine.git#main"
+    "water-engine": "github:Cruikshanks/water-engine#main"
   },
   "devDependencies": {
     "eslint": "^9.39.5",
