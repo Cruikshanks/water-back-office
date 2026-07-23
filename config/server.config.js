@@ -17,5 +17,9 @@ export default {
       isCaseSensitive: false,
       stripTrailingSlash: true
     }
+  },
+  yar: {
+    password: process.env.COOKIE_SECRET,
+    sessionName: process.env.SESSION_NAME
   }
 }
