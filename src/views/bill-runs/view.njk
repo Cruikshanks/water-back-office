@@ -1,0 +1,31 @@
+{% extends 'layout.njk' %}
+
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% block pageContent %}
+  {{ govukSummaryList({
+    classes: 'govuk-summary-list--no-border',
+    attributes: {
+      'data-test': 'meta-data'
+    },
+    rows: [
+      {
+        key: { text: 'Date created', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-data-date-created">' + createdAt + '</span>', classes: "meta-data__value" }
+      },
+      {
+        key: { text: 'Bill run type', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-data-bill-run-type">' + batchType + '</span>', classes: "meta-data__value" }
+      },
+      {
+        key: { text: 'Financial year', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-financial-year">' + toFinancialYearEnding + '</span>', classes: "meta-data__value" }
+      },
+      {
+        key: { text: 'Transaction file', classes: "meta-data__label" },
+        value: { html: '<span data-test="meta-transaction-file-reference">' + transactionFileReference + '</span>', classes: "meta-data__value" }
+      }
+    ]
+  }) }}
+
+{% endblock %}

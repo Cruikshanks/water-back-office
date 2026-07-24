@@ -13,6 +13,12 @@ import FetchBillRunService from 'water-engine/dal/bill-runs/fetch-bill-run.servi
  * @returns {<object>} an object representing the `pageData` needed by the view bill run template. It contains
  * details of the bill run and the bills linked to it plus the page title.
  */
-export default function viewBillRunService(billRunId) {
-  return FetchBillRunService(billRunId)
+export default async function viewBillRunService(billRunId) {
+  const billRun = await FetchBillRunService(billRunId)
+
+  return {
+    pageTitle: `Bill run summary ${billRun.billRunNumber}`,
+    pageTitleCaption: `Midlands ${billRun.batchType}`,
+    ...billRun
+  }
 }
