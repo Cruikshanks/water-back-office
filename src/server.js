@@ -1,10 +1,6 @@
 import BaseServer from 'water-engine/base-server'
 
-import AirbrakeConfig from '../config/airbrake.config.js'
-import HapiConfig from '../config/hapi.config.js'
 import RouterPlugin from './plugins/router.plugin.js'
-import ServerConfig from '../config/server.config.js'
-import YarConfig from '../config/yar.config.js'
 
 /**
  * Initialises the Hapi server without starting it
@@ -18,9 +14,9 @@ import YarConfig from '../config/yar.config.js'
  * @returns {Promise<object>} The initialised Hapi server instance
  */
 export async function init() {
-  const config = _config()
+  const viewsConfig = _viewsConfig()
 
-  const server = await BaseServer(config)
+  const server = await BaseServer(viewsConfig)
 
   await _registerPlugins(server)
   await server.initialize()
@@ -49,16 +45,6 @@ process.on('unhandledRejection', (err) => {
   process.exit(1)
 })
 
-function _config() {
-  return {
-    airbrake: AirbrakeConfig,
-    hapi: HapiConfig,
-    server: ServerConfig,
-    vision: _visionConfig(),
-    yar: YarConfig
-  }
-}
-
 async function _registerPlugins(server) {
   // NOTE: This order matters to some plugins we register. Inserting into the order should be fine. But if you reorder
   // any existing plugin registration double-check you haven't broken anything!
@@ -74,11 +60,11 @@ async function _registerPlugins(server) {
  * to find stuff. For that to happen we need to dynamically resolve the path to the views directory relative to this at
  * run time.
  *
- * This is why the config is here and not in the `config/` directory.
+ * This is why the config is generated and passed through at runtime.
  *
  * @private
  */
-function _visionConfig() {
+function _viewsConfig() {
   return {
     // Only enable caching of templates if we are running in production
     isCached: process.env.NODE_ENV === 'production',
