@@ -3,7 +3,7 @@
  * @module ViewBillService
  */
 
-import FetchBillRunService from 'water-engine/dal/bill-runs/fetch-bill-run.service.js'
+import FetchBillRunDal from 'water-engine/dal/bill-runs/fetch-bill-run.dal.js'
 
 /**
  * Orchestrates fetching and presenting the data needed for the bill run page
@@ -14,7 +14,7 @@ import FetchBillRunService from 'water-engine/dal/bill-runs/fetch-bill-run.servi
  * details of the bill run and the bills linked to it plus the page title.
  */
 export default async function viewBillRunService(billRunId) {
-  const billRun = await FetchBillRunService(billRunId)
+  const billRun = await FetchBillRunDal(billRunId)
 
   return {
     pageTitle: `Bill run summary ${billRun.billRunNumber}`,

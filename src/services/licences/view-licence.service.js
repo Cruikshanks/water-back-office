@@ -3,7 +3,7 @@
  * @module ViewLicenceService
  */
 
-import FetchLicenceService from 'water-engine/dal/licences/fetch-licence.service.js'
+import FetchLicenceDal from 'water-engine/dal/licences/fetch-licence.dal.js'
 
 /**
  * Orchestrates fetching and presenting the data needed for the licence page
@@ -14,7 +14,7 @@ import FetchLicenceService from 'water-engine/dal/licences/fetch-licence.service
  * details of the licence and any linked data plus the page title.
  */
 export default async function viewLicenceService(licenceId) {
-  const licence = await FetchLicenceService(licenceId)
+  const licence = await FetchLicenceDal(licenceId)
 
   return {
     pageTitle: `Licence summary ${licence.licenceRef}`,
