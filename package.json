@@ -12,7 +12,7 @@
     "migrate:test": "NODE_ENV=test node node_modules/water-engine/db/wipe.database.js && NODE_ENV=test water-knex migrate:latest",
     "migrate:wipe": "NODE_ENV=test node node_modules/water-engine/db/wipe.database.js",
     "start": "node --watch index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test TZ=UTC vitest run",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -28,15 +28,18 @@
     "water-engine": "github:Cruikshanks/water-engine#main"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import-x": "^4.17.1",
     "eslint-plugin-jsdoc": "^63.1.0",
     "eslint-plugin-prettier": "^5.5.6",
-    "neostandard": "^0.13.0"
+    "neostandard": "^0.13.0",
+    "vitest": "^4.1.10"
   },
   "allowScripts": {
     "unrs-resolver@1.12.2": true,
-    "@parcel/watcher@2.6.0": true
+    "@parcel/watcher@2.6.0": true,
+    "fsevents@2.3.3": true
   }
 }
