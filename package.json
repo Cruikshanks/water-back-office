@@ -8,6 +8,9 @@
   "scripts": {
     "build": "bin/build",
     "lint": "eslint .",
+    "migrate": "water-knex migrate:latest",
+    "migrate:test": "NODE_ENV=test node node_modules/water-engine/db/wipe.database.js && NODE_ENV=test water-knex migrate:latest",
+    "migrate:wipe": "NODE_ENV=test node node_modules/water-engine/db/wipe.database.js",
     "start": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build"
