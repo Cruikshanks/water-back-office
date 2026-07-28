@@ -1,3 +1,8 @@
+/**
+ * Initialises and starts the Hapi server for the water-back-office application
+ * @module Server
+ */
+
 import BaseServer from 'water-engine/base-server'
 
 import RouterPlugin from './plugins/router.plugin.js'

@@ -12,7 +12,7 @@ import DetermineLicenceInWorkflow from '../../dal/licences/determine-licence-in-
  *
  * @param {string} licenceId - The UUID for the licence to view
  *
- * @returns {<object>} an object representing the `pageData` needed by the view licence template. It contains
+ * @returns {Promise<object>} an object representing the `pageData` needed by the view licence template. It contains
  * details of the licence and any linked data plus the page title.
  */
 export default async function viewLicenceService(licenceId) {

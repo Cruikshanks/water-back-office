@@ -7,6 +7,7 @@
   "type": "module",
   "scripts": {
     "build": "bin/build",
+    "docs": "water-jsdoc",
     "lint": "eslint .",
     "migrate": "water-knex migrate:latest",
     "migrate:test": "NODE_ENV=test node node_modules/water-engine/db/wipe.database.js && NODE_ENV=test water-knex migrate:latest",
