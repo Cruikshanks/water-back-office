@@ -45,6 +45,11 @@ export default {
           maxWorkers: ci ? 2 : '50%',
           // In CI use forked processes for safety; locally use threads for faster startup
           pool: ci ? 'forks' : 'threads',
+          // Inline water-engine so Vitest transforms it even though it lives in node_modules. Without this, its module
+          // namespace exports are non-configurable in strict ESM and vi.spyOn() cannot intercept them in CI (where
+          // water-engine is a regular installed package). Inlining makes it behave like a local module — the same
+          // reason vi.spyOn() works locally without this setting when water-engine is npm-linked.
+          server: { deps: { inline: ['water-engine'] } },
           sequence: {
             // Run this project before the 'series' project (lower number runs first)
             groupOrder: 0,
@@ -82,6 +87,11 @@ export default {
           maxWorkers: 1,
           // Use forked processes to ensure each worker has a clean process boundary
           pool: 'forks',
+          // Inline water-engine so Vitest transforms it even though it lives in node_modules. Without this, its module
+          // namespace exports are non-configurable in strict ESM and vi.spyOn() cannot intercept them in CI (where
+          // water-engine is a regular installed package). Inlining makes it behave like a local module — the same
+          // reason vi.spyOn() works locally without this setting when water-engine is npm-linked.
+          server: { deps: { inline: ['water-engine'] } },
           sequence: {
             // Run this project after the 'parallel' project (higher number runs later)
             groupOrder: 1,
