@@ -3,7 +3,7 @@
  * @module ViewBillService
  */
 
-import FetchBillRunDal from 'water-engine/dal/bill-runs/fetch-bill-run.dal.js'
+import FetchBillRunDal from "water-engine/dal/bill-runs/fetch-bill-run.dal.js"
 
 /**
  * Orchestrates fetching and presenting the data needed for the bill run page
